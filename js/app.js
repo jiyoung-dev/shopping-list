@@ -25,12 +25,24 @@ function addItem(event){
   // get item's unique id
   const id = new Date().getTime().toString();
 
-  // control empty value 
   if (value && !editFlag){
     console.log(`add ${value}!`);
   } else if (value && editFlag){
     console.log('editing!');
   } else {
-    console.log('empty value!');
+    // if enter blank, show the danger message 
+    displayAlert("please enter value", "danger");
   }
+}
+
+// display alert function
+function displayAlert(text, action){
+  alert.textContent = text;
+  alert.classList.add(`alert-${action}`);
+
+  // remove alert after 1 second
+  setTimeout(function(){
+    alert.textContent = "";
+    alert.classList.remove(`alert-${action}`);
+  }, 1000)
 }

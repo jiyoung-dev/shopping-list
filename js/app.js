@@ -25,14 +25,44 @@ function addItem(event){
   // get item's unique id
   const id = new Date().getTime().toString();
 
-  if (value && !editFlag){
-    console.log(`add ${value}!`);
+  if (value && !editFlag){  // create items 
+    // add class
+    const element = document.createElement('article');
+    element.classList.add('shopping-item');
+    // add item's id 
+    const attr = document.createAttribute('data-id');
+    attr.value = id;
+    element.setAttributeNode(attr);
+    element.innerHTML = `
+          <p class="title">${value}</p>
+          <div class="btn-container">
+            <button type="button" class="edit-btn">
+              <i class="fas fa-edit"></i>
+            </button>
+            <button type="button" class="delete-btn">
+              <i class="fas fa-trash"></i>
+            </button>
+          </div>
+          `;
+    // append child
+    list.appendChild(element);
+    // display alert 
+    displayAlert("item added to the list!", "success");
+    // Save to local storage
+    addToLocalStorage(id, value);
+    
+
   } else if (value && editFlag){
     console.log('editing!');
   } else {
     // if enter blank, show the danger message 
     displayAlert("please enter value", "danger");
   }
+}
+
+// local storage 
+function addToLocalStorage(id, value){
+  console.log('로컬 저장소에 저장 성공!!');
 }
 
 // display alert function
@@ -44,5 +74,5 @@ function displayAlert(text, action){
   setTimeout(function(){
     alert.textContent = "";
     alert.classList.remove(`alert-${action}`);
-  }, 1000)
+  }, 1100)
 }

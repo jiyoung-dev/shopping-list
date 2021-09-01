@@ -13,3 +13,9 @@
   padding: 0.25rem 1rem;
   text-transform: capitalize;
 }
+.shopping-container {
+  visibility: hidden;
+}
+.show-container {
+  visibility: visible;
+}

@@ -14,6 +14,8 @@ let editID = "";
 
 // submit form 
 form.addEventListener('submit', addItem);
+// clear items
+clearBtn.addEventListener('click', clearItems);
 
 // add item function 
 function addItem(event){
@@ -44,13 +46,17 @@ function addItem(event){
             </button>
           </div>
           `;
+
     // append child
     list.appendChild(element);
+
     // display alert 
     displayAlert("item added to the list!", "success");
+    // show container
+    container.classList.add("show-container");
     // Save to local storage
     addToLocalStorage(id, value);
-    
+
 
   } else if (value && editFlag){
     console.log('editing!');
@@ -58,6 +64,20 @@ function addItem(event){
     // if enter blank, show the danger message 
     displayAlert("please enter value", "danger");
   }
+}
+ 
+// clear Items function
+function clearItems(){
+  const itmes = document.querySelectorAll('.shopping-item');
+  
+  if (itmes.length > 0){
+    itmes.forEach(function (item) {
+      list.removeChild(item);
+    });
+  }
+  container.classList.remove("show-container");
+  displayAlert("empty list", "danger");
+
 }
 
 // local storage 
